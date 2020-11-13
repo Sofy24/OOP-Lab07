@@ -2,7 +2,7 @@
  * 
  */
 package it.unibo.oop.lab.enum2;
-
+import static it.unibo.oop.lab.enum2.Place.*;
 /**
  * Represents an enumeration for declaring sports.
  * 
@@ -16,7 +16,15 @@ package it.unibo.oop.lab.enum2;
  * 
  */
 public enum Sport {
-
+	
+	//BASKET,VOLLEY,TENNIS,BIKE,F1,MOTOGP,SOCCER;
+	BASKET(5,"BASKET",INDOOR),
+	VOLLEY(5,"VOLLEY",INDOOR),
+	TENNIS(2,"TENNIS",INDOOR),
+	BIKE(1,"BIKE",OUTDOOR),
+	F1(1,"F1",OUTDOOR),
+	MOTOGP(1,"MOTOGP",OUTDOOR),
+	SOCCER(11,"SOCCER",OUTDOOR);
     /*
      * TODO
      * 
@@ -37,7 +45,12 @@ public enum Sport {
      * - soccer
      * 
      */
-
+	
+	private int nGiocatori;
+	private String nomeSport;
+	private Place luogo;
+	
+	
     /*
      * TODO
      * 
@@ -45,7 +58,14 @@ public enum Sport {
      * 
      * Declare required fields
      */
+	
+	private Sport(int nGiocatori, String nomeSport, Place luogo) {
+		this.nGiocatori = nGiocatori;
+		this.nomeSport = nomeSport;
+		this.luogo = luogo;
+	}
 
+	
     /*
      * TODO
      * 
@@ -55,7 +75,33 @@ public enum Sport {
      * 
      * - Sport(final Place place, final int noTeamMembers, final String actualName)
      */
+	
+	public boolean isIndividualSport() {
+		return nGiocatori == 1;
+	}
+	
+	public boolean isIndoorSport() {
+		return luogo == INDOOR;
+	}
+	
+	public Place getPlace() {
+		return luogo;
+	}
 
+
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Sport [nGiocatori=");
+		builder.append(nGiocatori);
+		builder.append(", nomeSport=");
+		builder.append(nomeSport);
+		builder.append(", luogo=");
+		builder.append(luogo);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
     /*
      * TODO
      * 

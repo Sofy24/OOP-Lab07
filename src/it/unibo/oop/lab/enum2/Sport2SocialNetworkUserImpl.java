@@ -3,6 +3,8 @@
  */
 package it.unibo.oop.lab.enum2;
 
+import java.util.*;
+
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
 import it.unibo.oop.lab.socialnetwork.User;
 
@@ -24,7 +26,8 @@ import it.unibo.oop.lab.socialnetwork.User;
  *            specific {@link User} type
  */
 public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUserImpl<U> {
-
+	
+	private final Set<Sport> sportUtente = new HashSet<>();
     /*
      * TODO
      * 
@@ -75,7 +78,7 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      *            a sport followed/done by the user
      */
     public void addSport(final Sport sport) {
-
+    	this.sportUtente.add(sport);
     }
 
     /**
@@ -87,12 +90,36 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      * @return true if user likes sport s
      */
     public boolean likesSport(final Sport s) {
-        return false;
+        return this.sportUtente.contains(s);
     }
 
     /*
      * [METHODS] NEW METHODS TO IMPLEMENT FROM SCRATCH
      */
+    public Set<Sport> getIndividualSports() {
+    	Iterator<Sport> iteratore = sportUtente.iterator();
+    	Set<Sport> individual = new HashSet<>();
+    	while (iteratore.hasNext()) {
+    		Sport s = iteratore.next();
+    		if(((Sport)s).isIndividualSport()) {
+    			individual.add(s);
+    		}
+    	}
+    	return individual;
+    }
+
+	public Set<Sport> getSportPracticedInPlace(Place p) {
+		Iterator<Sport> iteratore2 = sportUtente.iterator();
+    	Set<Sport> set = new HashSet<>();
+    	while (iteratore2.hasNext()) {
+    		Sport s = iteratore2.next();
+    		if(((Sport)s).getPlace().equals(p)) {
+    			set.add(s);
+    		}
+    	}
+    	
+		return set;
+	}
 
     /**
      * Returns the set of individual sports followed/practiced by this user: a
